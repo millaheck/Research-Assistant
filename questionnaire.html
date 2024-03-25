@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Assistant</title>
+    <meta name="description" content="Research Assistant.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+
+<body>
+    <nav class="theme-dark">
+        <div class="container-menu">
+            <a href="#" class="brand">
+                <img src="assets/img/logo.png" alt="Website logo">
+            </a>
+            <div class="container-menu-links">
+                <div class="nav-toggle" id="nav-toggle-btn">
+                    <div class="bar-1"></div>
+                    <div class="bar-2"></div>
+                    <div class="bar-3"></div>
+                </div>
+                <ul class="links-wrapper">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="keyterms.html">Key Terms</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
+                                in</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="cols-4-half section-selector-6 theme-dark">
+            <div class="col-2 col-text">
+                <form id="email-form" name="email-form" charset="utf-8" method="post" action="">
+                    <section>
+                        <h2>Research Problem</h2>
+                        <p>In this topic you must respond about your research problem. What do you want to research,
+                            that's your problem. Why research this?</p>
+                        <label for="problem-description">1- What is your research problem?</label>
+                        <textarea id="problem-description" name="problem-description" required></textarea>
+
+                        <label for="problem-relevance">2- Why are you researching this? Do you have a hypothesis for
+                            this to happen? What is the relevance of this research?</label>
+                        <textarea id="problem-relevance" name="problem-relevance" required></textarea>
+                    </section>
+                    <section>
+                        <h2>Methodology</h2>
+                        <p>How will you develop this research? If you have any questions about this topic, before
+                            answering, click the "Learn more" button.</p>
+                        <div><a href="keyterms.html" class="btn btn-outline btn-pill btn-shadow"><span>Learn
+                                    more</span></a></div>
+
+                        <label for="methodology-type">3- Is your research qualitative or quantitative?</label>
+                        <div><select id="methodology-type" name="methodology-type" required>
+                                <option value="">Please select</option>
+                                <option value="qualitative">Qualitative</option>
+                                <option value="quantitative">Quantitative</option>
+                            </select></div>
+
+                        <label for="methodology-description">4- Which methodology you think will give the answers you
+                            need for you research?</label>
+                        <style>
+                            .response-option1,
+                            .response-option2,
+                            .response-option3,
+                            .response-option4 {
+                                margin: 10px 0;
+                                display: flex;
+                                align-items: center;
+                                /* Alinha os itens verticalmente */
+                            }
+
+                            .response-option label {
+                                margin-left: 8px;
+                            }
+                        </style>
+                        <div>
+                            <div class="response-option1">
+                                <input type="checkbox" id="option1" name="response" value="Option 1">
+                                <label for="option1">Case study</label>
+                            </div>
+                            <div class="response-option2">
+                                <input type="checkbox" id="option2" name="response" value="Option 2">
+                                <label for="option2">Literature review</label>
+                            </div>
+                            <div class="response-option3">
+                                <input type="checkbox" id="option3" name="response" value="Option 3">
+                                <label for="option3">Questionnaire</label>
+                            </div>
+                            <div class="response-option4">
+                                <input type="checkbox" id="option4" name="response" value="Option 4">
+                                <label for="option4">Field study</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Research Phases</h2>
+                        <p>Research involves many steps to complete. Basically, we can say that there is a preparation
+                            stage, a stage where the data will be collected, and another where the data will be
+                            analyzed. If you have any questions about this topic, before answering, click the "Learn
+                            more" button. What are the delivery dates for your research?</p>
+                        <div><a href="keyterms.html" class="btn btn-outline btn-pill btn-shadow"><span>Learn
+                                    more</span></a></div>
+
+                        <label for="research-phases">5- Please fill in the tasks you have for each phase of your
+                            research:</label>
+                        <style>
+                            .question-container {
+                                margin: 20px;
+                            }
+
+                            .input-group1,
+                            .input-group2,
+                            .input-group3 {
+                                margin-right: 10px;
+                                font-weight: bold;
+                            }
+
+                            .input-group1,
+                            .input-group2,
+                            .input-group3 {
+                                width: calc(100% - 60px);
+                                padding: 8px;
+                                border-radius: 4px;
+                                border: 1px solid #ccc;
+                                flex-grow: 1;
+                            }
+
+                            .task-label {
+                                width: 60px;
+                                color: aquamarine;
+                            }
+                        </style>
+                        <div class="input-group1">
+                            <label for="preparatory-phase">Preparatory Phase:</label>
+                            <div><span class="task-label">Task 1:</span>
+                                <input type="text" id="preparatory-task-1" name="task-1">
+                                <span class="task-label">Task 2:</span>
+                                <input type="text" id="preparatory-task-2" name="task-2">
+                                <span class="task-label">Task 3:</span>
+                                <input type="text" id="preparatory-task-3" name="task-3">
+                                <span class="task-label">Task 4:</span>
+                                <input type="text" id="preparatory-task-4" name="task-4">
+                                <span class="task-label">Task 5:</span>
+                                <input type="text" id="preparatory-task-5" name="task-5">
+                            </div>
+                        </div>
+                        <div class="input-group2">
+                            <label for="data-collection-phase">Data Collection Phase:</label>
+                            <div><span class="task-label">Task 1:</span>
+                                <input type="text" id="collection-task-1" name="task-1">
+                                <span class="task-label">Task 2:</span>
+                                <input type="text" id="collection-task-2" name="task-2">
+                                <span class="task-label">Task 3:</span>
+                                <input type="text" id="collection-task-3" name="task-3">
+                                <span class="task-label">Task 4:</span>
+                                <input type="text" id="collection-task-4" name="task-4">
+                                <span class="task-label">Task 5:</span>
+                                <input type="text" id="collection-task-5" name="task-5">
+                            </div>
+                        </div>
+                        <div class="input-group3">
+                            <label for="data-analysis-phase">Data Analysis Phase:</label>
+                            <div><span class="task-label">Task 1:</span>
+                                <input type="text" id="analysis-task-1" name="task-1">
+                                <span class="task-label">Task 2:</span>
+                                <input type="text" id="analysis-task-2" name="task-2">
+                                <span class="task-label">Task 3:</span>
+                                <input type="text" id="analysis-task-3" name="task-3">
+                                <span class="task-label">Task 4:</span>
+                                <input type="text" id="analysis-task-4" name="task-4">
+                                <span class="task-label">Task 5:</span>
+                                <input type="text" id="analysis-task-5" name="task-5">
+                            </div>
+                        </div>
+                        <section>
+                            <label for="project-deadlines">6- What are the deadlines you have for this project
+                                research?</label>
+                            <style>
+                                .delivery-form {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    align-items: center;
+                                }
+
+                                .delivery-form .form-group {
+                                    display: flex;
+                                    align-items: center;
+                                    margin-right: 20px;
+                                    /* Espaçamento entre os grupos de input */
+                                }
+
+                                .delivery-form label {
+                                    margin-right: 10px;
+                                }
+
+                                .delivery-form input[type="text"],
+                                .delivery-form input[type="date"] {
+                                    margin-right: 10px;
+                                    /* Espaçamento entre inputs dentro de um grupo */
+                                }
+                            </style>
+                            <div class="delivery-row">
+                                <label for="delivery1">Delivery 1:</label>
+                                <input type="text" id="delivery1" name="delivery1">
+                                <label for="date1">Date:</label>
+                                <input type="date" id="date1" name="date1">
+                            </div>
+                            <div class="delivery-row">
+                                <label for="delivery2">Delivery 2:</label>
+                                <input type="text" id="delivery2" name="delivery2">
+                                <label for="date2">Date:</label>
+                                <input type="date" id="date2" name="date2">
+                            </div>
+                            <div class="delivery-row">
+                                <label for="delivery3">Delivery 3:</label>
+                                <input type="text" id="delivery3" name="delivery3">
+                                <label for="date1">Date:</label>
+                                <input type="date" id="date3" name="date3">
+                            </div>
+                            <div class="delivery-row">
+                                <label for="delivery4">Delivery 4:</label>
+                                <input type="text" id="delivery4" name="delivery4">
+                                <label for="date2">Date:</label>
+                                <input type="date" id="date4" name="date4">
+                            </div>
+                        </section>
+                    </section>
+                    <button id="btn-submit" class="btn-solid btn-pill btn-shadow" type="submit" data-validate="submit"
+                        aria-label="Send message"><span>Submit questionnaire</span></button>
+            </div>
+
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer-0 text-center-mobile text-center-desktop theme-dark">
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="keyterms.html">Key Terms</a></li>
+            <li><a href="#">Legal &amp; Privacy</a></li>
+        </ul>
+        <ul class="footer-icons">
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
+        </ul>
+        <div class="copyright">
+            <p>Copyright © 2024 Research Assistant Tool. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Import the necessary functions from the Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPjv94orRGsAntSYukwaPGRydWOvtFcW4",
+            authDomain: "research-assistant-a8c24.firebaseapp.com",
+            projectId: "research-assistant-a8c24",
+            storageBucket: "research-assistant-a8c24.appspot.com",
+            messagingSenderId: "914211567397",
+            appId: "1:914211567397:web:cbb4b0acb1f9f9fc900ccc",
+            measurementId: "G-1DG6QE214B"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Initialize Firebase Auth
+        const db = getFirestore(app); // Initialize Firestore
+        document.getElementById('email-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // Collect questionnaire responses
+        const responses = {
+            problemDescription: document.getElementById('problem-description').value,
+            problemRelevance: document.getElementById('problem-relevance').value,
+            methodologyType: document.getElementById('methodology-type').value,
+            methodologyOptions: [
+                document.getElementById('option1').checked ? 'Case study' : null,
+                document.getElementById('option2').checked ? 'Literature review' : null,
+                document.getElementById('option3').checked ? 'Questionnaire' : null,
+                document.getElementById('option4').checked ? 'Field study' : null,
+            ].filter(Boolean), // Filters out unchecked/null options
+            researchPhases: {
+                preparatoryPhase: [
+                    document.getElementById('preparatory-task-1').value,
+                    document.getElementById('preparatory-task-2').value,
+                    document.getElementById('preparatory-task-3').value,
+                    document.getElementById('preparatory-task-4').value,
+                    document.getElementById('preparatory-task-5').value,
+                ],
+                dataCollectionPhase: [
+                    document.getElementById('collection-task-1').value,
+                    document.getElementById('collection-task-2').value,
+                    document.getElementById('collection-task-3').value,
+                    document.getElementById('collection-task-4').value,
+                    document.getElementById('collection-task-5').value,
+                ],
+                dataAnalysisPhase: [
+                    document.getElementById('analysis-task-1').value,
+                    document.getElementById('analysis-task-2').value,
+                    document.getElementById('analysis-task-3').value,
+                    document.getElementById('analysis-task-4').value,
+                    document.getElementById('analysis-task-5').value,
+                ],
+            },
+            projectDeadlines: [
+                { delivery: document.getElementById('delivery1').value, date: document.getElementById('date1').value },
+                { delivery: document.getElementById('delivery2').value, date: document.getElementById('date2').value },
+                { delivery: document.getElementById('delivery3').value, date: document.getElementById('date3').value },
+                { delivery: document.getElementById('delivery4').value, date: document.getElementById('date4').value },
+            ]
+        };
+
+        try {
+            await addDoc(collection(db, "questionnaireResponses"), responses);
+            console.log('Questionnaire responses saved successfully');
+            // Optional: Clear the form or show a success message
+        } catch (error) {
+            console.error('Error saving questionnaire responses: ', error);
+            // Optional: Show an error message
+        }
+    });
+    </script>
+</body>
+
+</html>

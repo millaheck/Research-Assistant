@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Assistant</title>
+    <meta name="description" content="Research Assistant.">
+    <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+
+<body>
+    <nav class="theme-dark">
+        <div class="container-menu">
+            <a href="#" class="brand">
+                <img src="assets/img/logo.png" alt="Website logo">
+            </a>
+            <div class="container-menu-links">
+                <div class="nav-toggle" id="nav-toggle-btn">
+                    <div class="bar-1"></div>
+                    <div class="bar-2"></div>
+                    <div class="bar-3"></div>
+                </div>
+                <ul class="links-wrapper">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="keyterms.html">Key Terms</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
+                                in</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+
+        <section class="cols-2-half theme-dark section-selector-5">
+            <div class="col-2 col-text">
+                <h2>Sign Up</h2>
+                <p>Don't have an account with us yet? Sign up and enjoy!</p>
+                <form id="signup-form" name="email-form" charset="utf-8" method="post" action="">
+                    <div class="form-row">
+                        <label for="email" class="answer">Email:</label>
+                        <div><input type="email" name="email" id="email" required=""></div>
+                    </div>
+                    <div class="form-row">
+                        <label for="password" class="answer">Password:</label>
+                        <div><input type="password" name="password" id="password" aria-required="true" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="confirm-password" class="answer">Confirm your password:</label>
+                        <div><input type="password" name="confirm-password" aria-required="true" required=""></div>
+                    </div>
+                    <div class="form-footer">
+                        <button id="btn-submit" class="btn-solid btn-pill btn-shadow" type="submit"
+                            data-validate="submit" aria-label="Send message"><span>Enter</span></button>
+                    </div>
+                </form>
+                <div id="error-message"></div>
+            </div>
+            <div class="col-2 col-visual desktop-bleed-all">
+                <figure>
+                    <img src="assets/img/capa3.jpg" alt="Placeholder image">
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-0 text-center-mobile text-center-desktop theme-dark">
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="keyterms.html">Key Terms</a></li>
+            <li><a href="#">Legal &amp; Privacy</a></li>
+        </ul>
+        <ul class="footer-icons">
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
+        </ul>
+        <div class="copyright">
+            <p>Copyright © 2024 Research Assistant Tool. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Import the necessary functions from the Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPjv94orRGsAntSYukwaPGRydWOvtFcW4",
+            authDomain: "research-assistant-a8c24.firebaseapp.com",
+            projectId: "research-assistant-a8c24",
+            storageBucket: "research-assistant-a8c24.appspot.com",
+            messagingSenderId: "914211567397",
+            appId: "1:914211567397:web:cbb4b0acb1f9f9fc900ccc",
+            measurementId: "G-1DG6QE214B"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Initialize Firebase Auth
+        const db = getFirestore(app); // Initialize Firestore
+
+        document.getElementById('signup-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // User registration successful
+                    const user = userCredential.user;
+                    console.log("User created:", user);
+
+                    // Additional user data you want to save
+                    const userData = {
+                        email: user.email,
+                        createdAt: new Date() // Current timestamp
+                        // You can add more user-related data here
+                    };
+
+                    // Save the user data to Firestore
+                    const userRef = doc(db, "users", user.uid); // "users" is the collection name
+                    setDoc(userRef, userData)
+                        .then(() => {
+                            console.log("User data saved to Firestore");
+                            // Redirect to home page or a post-signup page
+                            window.location.href = "questionnaire.html"; // Adjust the redirection URL as needed
+                        })
+                        .catch((error) => {
+                            console.error("Error saving user data to Firestore:", error);
+                        });
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // Show error message to the user
+                    console.error("Error in user registration:", errorCode, errorMessage);
+                });
+        });
+    </script>
+</body>
+
+</html>
