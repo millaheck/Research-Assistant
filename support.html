@@ -116,6 +116,29 @@
         const auth = getAuth(app); // Initialize Firebase Auth
         const db = getFirestore(app); // Initialize Firestore
 
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Usuário está logado, esconder o botão de Sign in e mostrar o botão de Logout
+                document.getElementById('btn-signin').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+            } else {
+                // Usuário não está logado, mostrar o botão de Sign in e esconder o botão de Logout
+                document.getElementById('btn-signin').style.display = 'block';
+                document.getElementById('logout-btn').style.display = 'none';
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            auth.signOut().then(() => {
+                console.log('User logged out successfully');
+                // Redireciona o usuário para a página de login após o logout
+                window.location.href = 'signin.html';
+            }).catch((error) => {
+                console.error('Logout Error:', error);
+            });
+        });
+
+
         document.getElementById('support-form').addEventListener('submit', async function (event) {
             event.preventDefault();
 

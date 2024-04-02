@@ -289,61 +289,97 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app); // Initialize Firebase Auth
         const db = getFirestore(app); // Initialize Firestore
-        document.getElementById('email-form').addEventListener('submit', async function(event) {
-        event.preventDefault();
 
-        // Collect questionnaire responses
-        const responses = {
-            problemDescription: document.getElementById('problem-description').value,
-            problemRelevance: document.getElementById('problem-relevance').value,
-            methodologyType: document.getElementById('methodology-type').value,
-            methodologyOptions: [
-                document.getElementById('option1').checked ? 'Case study' : null,
-                document.getElementById('option2').checked ? 'Literature review' : null,
-                document.getElementById('option3').checked ? 'Questionnaire' : null,
-                document.getElementById('option4').checked ? 'Field study' : null,
-            ].filter(Boolean), // Filters out unchecked/null options
-            researchPhases: {
-                preparatoryPhase: [
-                    document.getElementById('preparatory-task-1').value,
-                    document.getElementById('preparatory-task-2').value,
-                    document.getElementById('preparatory-task-3').value,
-                    document.getElementById('preparatory-task-4').value,
-                    document.getElementById('preparatory-task-5').value,
-                ],
-                dataCollectionPhase: [
-                    document.getElementById('collection-task-1').value,
-                    document.getElementById('collection-task-2').value,
-                    document.getElementById('collection-task-3').value,
-                    document.getElementById('collection-task-4').value,
-                    document.getElementById('collection-task-5').value,
-                ],
-                dataAnalysisPhase: [
-                    document.getElementById('analysis-task-1').value,
-                    document.getElementById('analysis-task-2').value,
-                    document.getElementById('analysis-task-3').value,
-                    document.getElementById('analysis-task-4').value,
-                    document.getElementById('analysis-task-5').value,
-                ],
-            },
-            projectDeadlines: [
-                { delivery: document.getElementById('delivery1').value, date: document.getElementById('date1').value },
-                { delivery: document.getElementById('delivery2').value, date: document.getElementById('date2').value },
-                { delivery: document.getElementById('delivery3').value, date: document.getElementById('date3').value },
-                { delivery: document.getElementById('delivery4').value, date: document.getElementById('date4').value },
-            ]
-        };
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Usuário está logado, esconder o botão de Sign in e mostrar o botão de Logout
+                document.getElementById('btn-signin').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+            } else {
+                // Usuário não está logado, mostrar o botão de Sign in e esconder o botão de Logout
+                document.getElementById('btn-signin').style.display = 'block';
+                document.getElementById('logout-btn').style.display = 'none';
+            }
+        });
 
-        try {
-            await addDoc(collection(db, "questionnaireResponses"), responses);
-            console.log('Questionnaire responses saved successfully');
-            // Optional: Clear the form or show a success message
-        } catch (error) {
-            console.error('Error saving questionnaire responses: ', error);
-            // Optional: Show an error message
-        }
-    });
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            firebase.auth().signOut().then(() => {
+                console.log('User logged out successfully');
+                window.location.href = 'signin.html'; // Redireciona o usuário para a página de login após o logout
+            }).catch((error) => {
+                console.error('Logout Error:', error);
+            });
+        });
+
+
+        document.getElementById('email-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Verificar o estado de autenticação do usuário
+            firebase.auth().onAuthStateChanged(user => {
+                if (!user) {
+                    // Usuário NÃO está logado, redirecionar para a página de login
+                    window.location.href = 'signin.html';
+                }
+                // Se o usuário estiver logado, não faça nada e permita que ele acesse a página.
+            });
+
+
+            // Collect questionnaire responses
+            const responses = {
+                problemDescription: document.getElementById('problem-description').value,
+                problemRelevance: document.getElementById('problem-relevance').value,
+                methodologyType: document.getElementById('methodology-type').value,
+                methodologyOptions: [
+                    document.getElementById('option1').checked ? 'Case study' : null,
+                    document.getElementById('option2').checked ? 'Literature review' : null,
+                    document.getElementById('option3').checked ? 'Questionnaire' : null,
+                    document.getElementById('option4').checked ? 'Field study' : null,
+                ].filter(Boolean), // Filters out unchecked/null options
+                researchPhases: {
+                    preparatoryPhase: [
+                        document.getElementById('preparatory-task-1').value,
+                        document.getElementById('preparatory-task-2').value,
+                        document.getElementById('preparatory-task-3').value,
+                        document.getElementById('preparatory-task-4').value,
+                        document.getElementById('preparatory-task-5').value,
+                    ],
+                    dataCollectionPhase: [
+                        document.getElementById('collection-task-1').value,
+                        document.getElementById('collection-task-2').value,
+                        document.getElementById('collection-task-3').value,
+                        document.getElementById('collection-task-4').value,
+                        document.getElementById('collection-task-5').value,
+                    ],
+                    dataAnalysisPhase: [
+                        document.getElementById('analysis-task-1').value,
+                        document.getElementById('analysis-task-2').value,
+                        document.getElementById('analysis-task-3').value,
+                        document.getElementById('analysis-task-4').value,
+                        document.getElementById('analysis-task-5').value,
+                    ],
+                },
+                projectDeadlines: [
+                    { delivery: document.getElementById('delivery1').value, date: document.getElementById('date1').value },
+                    { delivery: document.getElementById('delivery2').value, date: document.getElementById('date2').value },
+                    { delivery: document.getElementById('delivery3').value, date: document.getElementById('date3').value },
+                    { delivery: document.getElementById('delivery4').value, date: document.getElementById('date4').value },
+                ]
+            };
+
+            try {
+                await addDoc(collection(db, "questionnaireResponses"), responses);
+                console.log('Questionnaire responses saved successfully');
+                // Optional: Clear the form or show a success message
+            } catch (error) {
+                console.error('Error saving questionnaire responses: ', error);
+                // Optional: Show an error message
+            }
+        });
+
     </script>
+    <script src="analizeResponses.js"></script>
+
 </body>
 
 </html>

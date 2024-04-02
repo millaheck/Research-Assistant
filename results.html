@@ -1,114 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Assistant</title>
     <meta name="description" content="Research Assistant.">
-	<!-- Preload large image -->
-
-	<!-- Stylesheets -->
     <link rel="stylesheet" href="https://lunevedy.com/assets/2.0/css/lunevedy.min.css" />
     <link rel="stylesheet" href="assets/css/custom.css" />
-
-	<!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        .results-section {
+            margin-bottom: 20px;
+        }
 
-    <!-- Font Awesome 6 icons. Delete if not using. -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        .results-section h2 {
+            margin: 10px 0;
+        }
 
-    <!-- Line Awesome thin icons. Delete if not using. -->
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+        .results-content {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
+
 <body>
-    <!-- menu and 'hero block' header -->
     <nav class="theme-dark">
         <div class="container-menu">
             <a href="#" class="brand">
                 <img src="assets/img/logo.png" alt="Website logo">
             </a>
-    
+
             <div class="container-menu-links">
-    
-                <!-- hamburger icon -->
                 <div class="nav-toggle" id="nav-toggle-btn">
                     <div class="bar-1"></div>
                     <div class="bar-2"></div>
                     <div class="bar-3"></div>
                 </div>
-    
-                <!-- List of links -->
+
                 <ul class="links-wrapper">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="keyterms.html">Key Terms</a></li>
                     <li><a href="support.html">Support</a></li>
-                    <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign in</span></a></li>
                 </ul>
-    
+                <button id="btn-signin" class="btn btn-outline btn-pill btn-shadow" href="signin.html" style="display: none;"><span>Sign in</span></button>
+                <button id="logout-btn" style="display: none;">Logout</button>
             </div>
         </div>
     </nav>
 
-	<!-- section starts here -->
-<main>
-	<section class="w-1356px section-selector-7 theme-dark"><div class="col-1 text-center w-820px">
-    <h2 class="">Get your results:</h2>
-    <h3>Click in the links below to download your personalized results.</h3></div>
+    <main id="resultsContainer">
+        <section class="w-1356px section-selector-7 theme-dark">
+            <div class="col-1 text-center w-820px">
+                <h2 class="">Get your results:</h2>
 
-    <!-- Begin three-column flexbox grid -->
-    <div class="flex-cols-3 cols-gap-3 text-center cols-background cols-padding cols-borders-width-2 cols-shadows">
-        <div class="col-3">
-            <figure class="icon">
-                <i class="las la-user-friends"></i>
-            </figure>
-        <a href="#" class="col-3-h3">Methodology Overview</a>	
-        <p>Here you will find the overview of your methodology.</p>	
-        </div>
+                <div id="resultsContainer">
+                    <!-- Results sections will be dynamically populated here -->
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <div class="col-3">
-            <figure class="icon">
-                <i class="las la-comments"></i>
-            </figure>
-<a href="#" class="col-3-h3">Timetable</a>	
-        <p>Find the timetable to develop your research and get organized with the steps needed.</p>	
-        </div>
-
-        <div class="col-3">
-            <figure class="icon">
-                <i class="las la-lightbulb"></i>
-            </figure>
-<a href="#" class="col-3-h3">Brief summary of your research</a>	
-
-        <p>See the overview of your research.</p>	
-        </div>
-    </div>
-    <!-- End three-column flexbox grid -->
-
-</section>
-
-<!-- section ends here -->
-</body>
-</main>
-<footer class="footer-0 text-center-mobile text-center-desktop theme-dark"><ul class="footer-links">		
-    <li><a href="index.html">Home</a></li>
+    <footer class="footer-0 text-center-mobile text-center-desktop theme-dark">
+        <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="keyterms.html">Key Terms</a></li>
             <li><a href="#">Legal &amp; Privacy</a></li>
-    </ul><ul class="footer-icons">		
-    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+        </ul>
+        <ul class="footer-icons">
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
             <li><a href="#"><i class="fa-solid fa-envelope"></i></a></li>
-    </ul>
-        <div class="copyright">	
-    <p>Copyright © 2024 Research Assistant Tool. All rights reserved.</p>
-    </div></footer>
+        </ul>
+        <div class="copyright">
+            <p>Copyright © 2024 Research Assistant Tool. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script type="module">
         // Import the necessary functions from the Firebase SDKs
@@ -130,6 +112,51 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app); // Initialize Firebase Auth
         const db = getFirestore(app); // Initialize Firestore
-      </script>
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('btn-signin').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+                fetchAndDisplayResults(user.uid);
+            } else {
+                document.getElementById('btn-signin').style.display = 'block';
+                document.getElementById('logout-btn').style.display = 'none';
+                // Opcionalmente, redirecione para a página de login
+                console.log("User is not logged in.");
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            try {
+                await auth.signOut();
+                console.log('User logged out successfully');
+                window.location.href = 'signin.html';
+            } catch (error) {
+                console.error('Logout Error:', error);
+            }
+        });
+
+        async function fetchAndDisplayResults(userId) {
+            const docRef = doc(db, "userResults", userId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('resultsContainer').innerHTML = `
+                    <div>
+                        <h2>Methodology Overview</h2>
+                        <p>${data.methodologyOverview}</p>
+                        <h2>Timetable</h2>
+                        <p>${data.timetable}</p>
+                        <h2>Brief Summary of Your Research</h2>
+                        <p>${data.briefSummary}</p>
+                    </div>
+                `;
+            } else {
+                console.log("No results found for the user.");
+            }
+        }
+    </script>
 </body>
+
 </html>
