@@ -48,8 +48,7 @@
                 <!-- List of links -->
                 <ul class="links-wrapper">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="keyterms.html">Key Terms</a></li>
+                    <li><a href="keyterms.html">Introduction</a></li>
                     <li><a href="support.html">Support</a></li>
                     <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
                                 in</span></a></li>
@@ -70,7 +69,7 @@
                 more smoothly and searches tend to be more relevant.</p>
 
             <div class="container-btn">
-                <button id="start-questionnaire">Start Questionnaire</button>
+                <button id="start-questionnaire" class="btn btn-outline btn-pill btn-shadow">Start Questionnaire</button>
             </div>
 
         </div>
@@ -92,7 +91,7 @@
         <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="keyterms.html">Key Terms</a></li>
+            <li><a href="keyterms.html">Introduction</a></li>
             <li><a href="#">Legal &amp; Privacy</a></li>
         </ul>
         <ul class="footer-icons">
@@ -109,50 +108,54 @@
     </footer>
 
     <script type="module">
-        // Import the necessary functions from the Firebase SDKs
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+		// Import the necessary functions from the Firebase SDKs
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+		import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBPjv94orRGsAntSYukwaPGRydWOvtFcW4",
-            authDomain: "research-assistant-a8c24.firebaseapp.com",
-            projectId: "research-assistant-a8c24",
-            storageBucket: "research-assistant-a8c24.appspot.com",
-            messagingSenderId: "914211567397",
-            appId: "1:914211567397:web:cbb4b0acb1f9f9fc900ccc",
-            measurementId: "G-1DG6QE214B"
-        };
+		const firebaseConfig = {
+			apiKey: "AIzaSyBPjv94orRGsAntSYukwaPGRydWOvtFcW4",
+			authDomain: "research-assistant-a8c24.firebaseapp.com",
+			projectId: "research-assistant-a8c24",
+			storageBucket: "research-assistant-a8c24.appspot.com",
+			messagingSenderId: "914211567397",
+			appId: "1:914211567397:web:cbb4b0acb1f9f9fc900ccc",
+			measurementId: "G-1DG6QE214B"
+		};
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Initialize Firebase Auth
-        const db = getFirestore(app); // Initialize Firestore
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const auth = getAuth(app); // Initialize Firebase Auth
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // Usuário está logado, esconder o botão de Sign in e mostrar o botão de Logout
-                document.getElementById('btn-cta').style.display = 'none';
-                document.getElementById('logout-btn').style.display = 'block';
-            } else {
-                // Usuário não está logado, mostrar o botão de Sign in e esconder o botão de Logout
-                document.getElementById('btn-cta').style.display = 'block';
-                document.getElementById('logout-btn').style.display = 'none';
-            }
-        });
+		onAuthStateChanged(auth, user => {
+    if (user) {
+        // Usuário está logado
+        document.getElementById('logout-btn').style.display = 'block'; // Mostra o botão de logout
+        document.getElementById('btn-cta').style.display = 'none'; // Oculta o botão de sign in
+    } else {
+        // Usuário não está logado
+        document.getElementById('logout-btn').style.display = 'none'; // Oculta o botão de logout
+        document.getElementById('btn-cta').style.display = 'block'; // Mostra o botão de sign in
+    }
+});
 
+// Adiciona o evento de clique para o botão de logout
+document.getElementById('logout-btn').addEventListener('click', () => {
+    signOut(auth).then(() => {
+        console.log('User logged out');
+        window.location.reload();
+    }).catch((error) => {
+        console.error('Logout Error:', error);
+    });
+});
 
-
-        document.getElementById('logout-btn').addEventListener('click', function () {
-            auth.signOut().then(() => {
-                console.log('User logged out successfully');
-                // Redireciona o usuário para a página de login após o logout
-                window.location.href = 'signin.html';
-            }).catch((error) => {
-                console.error('Logout Error:', error);
-            });
-        });
-    </script>
+// Adiciona o evento de clique para o botão "Start Questionnaire"
+document.getElementById('start-questionnaire').addEventListener('click', () => {
+    if (auth.currentUser) {
+        window.location.href = 'questionnaire.html'; // Redireciona para a página do questionário
+    } else {
+        window.location.href = 'signin.html'; // Redireciona para a página de login
+    }
+});
+	</script>
 </body>
-
 </html>

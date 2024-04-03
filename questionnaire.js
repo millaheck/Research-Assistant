@@ -5,7 +5,7 @@ document.getElementById('email-form').addEventListener('submit', async function(
     // Recupera os valores dos campos
     try {
     const formData = {
-        problemDescription: document.getElementById('problem-description').value.trim(),
+        problemDescription: ('problem-description').value.trim(),
         problemRelevance: document.getElementById('problem-relevance').value.trim(),
         methodologyType: document.getElementById('methodology-type').value,
         methodologyDescription: document.getElementById('methodology-description').value.trim(),
