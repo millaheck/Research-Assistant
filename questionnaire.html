@@ -37,8 +37,9 @@
                     <li><a href="keyterms.html">Key Terms</a></li>
                     <li><a href="support.html">Support</a></li>
                     <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
-                                in</span></a></li>
+                        in</span></a></li>
                 </ul>
+				<button id="logout-btn" style="display: none;">Logout</button>
             </div>
         </div>
     </nav>
@@ -269,10 +270,10 @@
         </div>
     </footer>
 
-    <script type="module">
+    <script type="module" src="questionnaire.js">
         // Import the necessary functions from the Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -290,14 +291,14 @@
         const auth = getAuth(app); // Initialize Firebase Auth
         const db = getFirestore(app); // Initialize Firestore
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, user => {
             if (user) {
                 // Usuário está logado, esconder o botão de Sign in e mostrar o botão de Logout
-                document.getElementById('btn-signin').style.display = 'none';
+                document.getElementById('btn-cta').style.display = 'none';
                 document.getElementById('logout-btn').style.display = 'block';
             } else {
                 // Usuário não está logado, mostrar o botão de Sign in e esconder o botão de Logout
-                document.getElementById('btn-signin').style.display = 'block';
+                document.getElementById('btn-cta').style.display = 'block';
                 document.getElementById('logout-btn').style.display = 'none';
             }
         });
@@ -379,7 +380,5 @@
 
     </script>
     <script src="analizeResponses.js"></script>
-
 </body>
-
 </html>

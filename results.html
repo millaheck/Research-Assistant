@@ -53,9 +53,10 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="keyterms.html">Key Terms</a></li>
                     <li><a href="support.html">Support</a></li>
+                    <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
+                        in</span></a></li>
+                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow" style="display: none;">Logout</button>
                 </ul>
-                <button id="btn-signin" class="btn btn-outline btn-pill btn-shadow" href="signin.html" style="display: none;"><span>Sign in</span></button>
-                <button id="logout-btn" style="display: none;">Logout</button>
             </div>
         </div>
     </nav>
@@ -95,7 +96,7 @@
     <script type="module">
         // Import the necessary functions from the Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -115,11 +116,11 @@
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                document.getElementById('btn-signin').style.display = 'none';
+                document.getElementById('btn-cta').style.display = 'none';
                 document.getElementById('logout-btn').style.display = 'block';
                 fetchAndDisplayResults(user.uid);
             } else {
-                document.getElementById('btn-signin').style.display = 'block';
+                document.getElementById('btn-cta').style.display = 'block';
                 document.getElementById('logout-btn').style.display = 'none';
                 // Opcionalmente, redirecione para a página de login
                 console.log("User is not logged in.");

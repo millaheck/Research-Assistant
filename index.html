@@ -36,10 +36,10 @@
 					<li><a href="about.html">About</a></li>
 					<li><a href="keyterms.html">Key Terms</a></li>
 					<li><a href="support.html">Support</a></li>
+					<li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
+						in</span></a></li>
+					<button id="logout-btn" class="btn btn-outline btn-pill btn-shadow" style="display: none;">Logout</button>
 				</ul>
-				<button id="btn-signin" class="btn btn-outline btn-pill btn-shadow" href="signin.html"
-					style="display: none;"><span>Sign in</span></button>
-				<button id="logout-btn" style="display: none;">Logout</button>
 			</div>
 		</div>
 	</nav>
@@ -114,7 +114,7 @@
 	<script type="module">
 		// Import the necessary functions from the Firebase SDKs
 		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-		import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+		import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 		import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
 		const firebaseConfig = {
@@ -135,12 +135,12 @@
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				// Usuário está logado, esconder o botão de Sign in e mostrar o botão de Logout
-				document.getElementById('btn-signin').style.display = 'none'; // Supõe que 'btn-cta' é o botão "Sign In"
+				document.getElementById('btn-cta').style.display = 'none'; // Supõe que 'btn-cta' é o botão "Sign In"
 				const logoutBtn = document.getElementById('logout-btn');
 				if (logoutBtn) logoutBtn.style.display = 'block'; // Mostra o botão de logout se ele existir
 			} else {
 				// Usuário não está logado
-				document.getElementById('btn-signin').style.display = 'block'; // Mostra o botão "Sign In"
+				document.getElementById('btn-cta').style.display = 'block'; // Mostra o botão "Sign In"
 				const logoutBtn = document.getElementById('logout-btn');
 				if (logoutBtn) logoutBtn.style.display = 'none'; // Esconde o botão de logout se ele existir
 			}
