@@ -1,25 +1,49 @@
-// Supondo que a inicialização do Firebase já foi feita no HTML
-document.getElementById('email-form').addEventListener('submit', async function(event) { 
+// Import the necessary functions from the Firebase SDKs
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBPjv94orRGsAntSYukwaPGRydWOvtFcW4",
+    authDomain: "research-assistant-a8c24.firebaseapp.com",
+    projectId: "research-assistant-a8c24",
+    storageBucket: "research-assistant-a8c24.appspot.com",
+    messagingSenderId: "914211567397",
+    appId: "1:914211567397:web:cbb4b0acb1f9f9fc900ccc",
+    measurementId: "G-1DG6QE214B"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); // Initialize Firebase Auth
+const db = getFirestore(app); // Initialize Firestore
+
+document.getElementById('email-form').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    // Recupera os valores dos campos
-    try {
     const formData = {
-        problemDescription: ('problem-description').value.trim(),
+        problemDescription: document.getElementById('problem-description').value.trim(),
         problemRelevance: document.getElementById('problem-relevance').value.trim(),
         methodologyType: document.getElementById('methodology-type').value,
-        methodologyDescription: document.getElementById('methodology-description').value.trim(),
-        dataCollectionMethod: document.getElementById('data-collection-method').value.trim(),
-        researchPhases: document.getElementById('research-phases').value.trim(),
-        projectDeadlines: document.getElementById('project-deadlines').value.trim(),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        methodologyDescription: Array.from(document.querySelectorAll('[name="response"]:checked')).map(el => el.value),
+        researchPhasesPreparatory: Array.from({length: 5}, (_, i) => document.getElementById(`preparatory-task-${i+1}`).value.trim()),
+        researchPhasesCollection: Array.from({length: 5}, (_, i) => document.getElementById(`collection-task-${i+1}`).value.trim()),
+        researchPhasesAnalysis: Array.from({length: 5}, (_, i) => document.getElementById(`analysis-task-${i+1}`).value.trim()),
+        projectDeadlines: Array.from({length: 4}, (_, i) => ({
+            delivery: document.getElementById(`delivery${i+1}`).value.trim(),
+            date: document.getElementById(`date${i+1}`).value
+        }))
     };
 
-        await firebase.firestore().collection('questionnaires').add(formData);
-        alert('Questionnaire submitted successfully');
+    try {
+        await addDoc(collection(db, "questionnaires"), formData);
+        console.log('Questionnaire submitted successfully');
         window.location.href = 'results.html'; // Ajuste conforme necessário
     } catch (error) {
         console.error('Error:', error);
         alert('There was a problem with your submission: ' + error.message);
     }
 });
+
+
+//timestamp: firebase.firestore.FieldValue.serverTimestamp()

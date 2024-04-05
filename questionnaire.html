@@ -239,10 +239,8 @@
                             </div>
                         </section>
                     </section>
-                    <button id="btn-submit" class="btn-solid btn-pill btn-shadow" type="submit" data-validate="submit"
-                        aria-label="Send message"><span>Submit questionnaire</span></button>
+                    <button id="btn-submit" class="btn-solid btn-pill btn-shadow" type="submit"><span>Submit questionnaire</span></button>
             </div>
-
             </form>
         </section>
     </main>
@@ -288,39 +286,59 @@
         const auth = getAuth(app); // Initialize Firebase Auth
         const db = getFirestore(app); // Initialize Firestore
 
-        onAuthStateChanged(auth, user => {
+        onAuthStateChanged(auth, (user) => {
+            const signInButton = document.getElementById('btn-cta');
+            const logoutButton = document.getElementById('logout-btn');
             if (user) {
-                // Usuário está logado, esconder o botão de Sign in e mostrar o botão de Logout
-                document.getElementById('btn-cta').style.display = 'none';
-                document.getElementById('logout-btn').style.display = 'block';
+                signInButton.style.display = 'none';
+                logoutButton.style.display = 'block';
             } else {
-                // Usuário não está logado, mostrar o botão de Sign in e esconder o botão de Logout
-                document.getElementById('btn-cta').style.display = 'block';
-                document.getElementById('logout-btn').style.display = 'none';
+                signInButton.style.display = 'block';
+                logoutButton.style.display = 'none';
             }
         });
 
-        document.getElementById('logout-btn').addEventListener('click', function () {
-            firebase.auth().signOut().then(() => {
-                console.log('User logged out successfully');
-                window.location.href = 'signin.html'; // Redireciona o usuário para a página de login após o logout
-            }).catch((error) => {
-                console.error('Logout Error:', error);
-            });
+        const form = document.getElementById('email-form');
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = {
+                // Colete os dados aqui
+            };
+
+            try {
+                await addDoc(collection(db, "questionnaires"), formData);
+                console.log('Questionnaire submitted successfully');
+                analyzeDataAndDisplayResults(formData); // Função para análise de dados
+                window.location.href = 'results.html'; // Redirecionamento
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
 
+        function analyzeDataAndDisplayResults(data) {
+            function analyzeDataAndDisplayResults(formData) {
+    // Exemplo de análise dos dados do formulário para gerar os resultados personalizados
+    const methodologyOverview = `Based on your selection, a ${formData.methodologyType} approach will be used. This methodology includes ${formData.methodologyOptions.join(", ")}.`;
+    
+    const timetable = `Your project has key deliveries scheduled on: ${formData.projectDeadlines.map(deadline => deadline.date).join(", ")}.`;
+    
+    const briefSummary = `Your research will explore ${formData.problemDescription}, focusing on ${formData.problemRelevance}. The chosen methodology is ${formData.methodologyType}, which will help in ${formData.methodologyOptions.length > 1 ? 'combining different research techniques' : 'deep diving into the specific aspects of the research'}.`;
 
-        document.getElementById('email-form').addEventListener('submit', async function (event) {
-            event.preventDefault();
+    // Aqui, você poderia atualizar o DOM com esses resultados, enviar para o backend, ou salvar no Firestore, etc.
+    console.log(methodologyOverview);
+    console.log(timetable);
+    console.log(briefSummary);
 
-            // Verificar o estado de autenticação do usuário
-            firebase.auth().onAuthStateChanged(user => {
-                if (!user) {
-                    // Usuário NÃO está logado, redirecionar para a página de login
-                    window.location.href = 'signin.html';
-                }
-                // Se o usuário estiver logado, não faça nada e permita que ele acesse a página.
-            });
+    // Exemplo de como você pode atualizar o DOM ou realizar outras ações com os resultados
+    // document.getElementById('methodologyOverview').textContent = methodologyOverview;
+    // document.getElementById('timetable').textContent = timetable;
+    // document.getElementById('briefSummary').textContent = briefSummary;
+
+    // Este é apenas um exemplo e deve ser ajustado conforme o seu contexto específico
+}
+
+            // Lógica para análise dos dados submetidos e definição de resultados personalizados
+        }
 
 
             // Collect questionnaire responses
@@ -372,9 +390,9 @@
             } catch (error) {
                 console.error('Error saving questionnaire responses: ', error);
                 // Optional: Show an error message
-            }
-        });
-
+            };
     </script>
+    <script src="questionnaire.js"></script>
 </body>
 </html>
+
