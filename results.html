@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +21,11 @@
         .results-section {
             margin-bottom: 20px;
         }
+
         .results-section h2 {
             margin: 10px 0;
         }
+
         .results-content {
             background-color: #f5f5f5;
             padding: 10px;
@@ -50,9 +53,9 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="keyterms.html">Introduction</a></li>
                     <li><a href="support.html">Support</a></li>
-                    <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
-                                in</span></a></li>
-                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow" style="display: none;">Logout</button>
+                   
+                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow"
+                        style="display: none;">Logout</button>
                 </ul>
             </div>
         </div>
@@ -62,12 +65,9 @@
         <section class="w-1356px section-selector-7 theme-dark">
             <div class="col-1 text-center w-820px">
                 <h2 class="">Get your results:</h2>
-                <p>Brief Summary of your research:</p>
+              
                 <div id="briefSummary" class="results-content">Loading...</div>
-                <p>Overview of the methodology:</p>
-                <div id="methodologyOverview" class="results-content">Loading...</div>
-                <p>Timetable:</p>
-                <div id="timetable" class="results-content">Loading...</div>
+                
             </div>
         </section>
     </main>
@@ -108,8 +108,8 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); 
-        const db = getFirestore(app); 
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -120,7 +120,7 @@
                 document.getElementById('logout-btn').style.display = 'none';
             }
         });
-        
+
         const fetchAndDisplayResults = async (userId) => {
             const resultsRef = collection(db, 'analysisResults');
             const q = query(resultsRef, where("userId", "==", userId), orderBy("timestamp", "desc"), limit(1));
@@ -133,13 +133,55 @@
                 console.log("We did not find results to analyze.");
             }
         };
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                fetchAndDisplayResults(user.uid);
-            } else {
-                console.log("User is not logged in.");
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const methodologyOverview = {
+                preparatory: research.phases.preparatory,
+                collection: research.phases.collection,
+                analysis: research.phases.analysis
+            };
+
+            // Iniciar a tabela
+            let tableHTML = `<h2>Methodology Overview</h2><table>`;
+
+            // Adicionar cabeçalhos da tabela
+            tableHTML += `
+    <tr>
+      <th>Etapa Preparatória</th>
+      <th>Etapa de Coleta de Dados</th>
+      <th>Etapa de Análise de Dados</th>
+    </tr>`;
+
+            // Adicionar linhas da tabela para cada tarefa
+            tableHTML += `<tr>`;
+            Object.keys(methodologyOverview).forEach(phase => {
+                tableHTML += `<td>`;
+                methodologyOverview[phase].forEach(task => {
+                    tableHTML += `<p>${task}</p>`;
+                });
+                tableHTML += `</td>`;
+            });
+            tableHTML += `</tr>`;
+
+            // Fechar a tabela
+            tableHTML += `</table>`;
+
+            // Se a revisão de literatura estiver incluída
+            if (data.includesLiteratureReview) {
+                tableHTML += `<p>Revisão Bibliográfica inclusa em todas as fases.</p>`;
             }
+
+            // Atualizar o DOM com a tabela
+            document.getElementById('methodologyOverview').innerHTML = tableHTML;
         });
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    fetchAndDisplayResults(user.uid);
+                } else {
+                    console.log("User is not logged in.");
+                }
+            });
     </script>
 </body>
 

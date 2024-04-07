@@ -22,35 +22,22 @@ exports.analyzeTextAndGenerateResults = functions.firestore
         const [result] = await client.analyzeSentiment({ document });
         const sentiment = result.documentSentiment;
 
-        let sentimentDescription = 'potential to be good research or not depends on how you approach the direction of your research';
-        if (sentiment.score > 0) {
+        let sentimentDescription = 'Potential to be good research or not depends on how you approach the direction of your research';
+        if (sentiment.score > 0) { 
             sentimentDescription = 'potencial to be worked on and make a good contribution to society';
         } else if (sentiment.score < 0) {
             sentimentDescription = 'perspectives to work on, even though you may face some problems if you do not address more specificity';
         }
 
-        const briefSummary = `The research addresses ${data.problemDescription} as a problem research that has a ${sentiment.score}. The methodology used will be ${data.methodologyDescription} and the ${data.methodologyType} approach will be utilized to explore the relevance of ${data.problemRelevance}.`;
+        const briefSummary = `The research addresses ${data.problemDescription} as a problem research that has a ${sentimentDescription}. The methodology used will be ${data.methodologyDescription} and the ${data.methodologyType} approach will be utilized to explore the fact that ${data.problemRelevance}.`;
 
         await db.collection('analysisResults').doc(context.params.responseId).set({
             userId: data.userId,
             briefSummary,
-            methodologyOverview,
-            timetable,
             sentiment: sentiment.score,
             timestamp: admin.firestore.FieldValue.serverTimestamp()
         });
-        console.log('Analysis saved successfully.');
+        console.log('Analysis and brief summary saved successfully.');
     });
 
-    exports.processQuestionnaireSubmission = functions.firestore
-    .document("questionnaireResponses/{responseId}")
-    .onCreate((snap, context) => {
-        const data = snap.data();
-        const methodologyOverview = `Methodology: ${data.methodologyDescription.join(", ")}. Research phases: ${data.research-phases}`;
-
-        return db.collection("methodologyOverviews").doc(context.params.responseId).set({
-            userId: data.userId,
-            overview: methodologyOverview,
-            timestamp: admin.firestore.FieldValue.serverTimestamp()
-        });
-    });
+   
