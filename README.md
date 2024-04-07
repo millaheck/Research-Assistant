@@ -44,7 +44,7 @@ https://firebase.google.com/?gad_source=1&gclid=EAIaIQobChMI_PrajaCwhQMVLZdQBh2s
 
 https://cloud.google.com/automl?utm_source=google&utm_medium=cpc&utm_campaign=emea-ie-all-en-dr-bkws-all-all-trial-e-gcp-1707574&utm_content=text-ad-none-any-DEV_c-CRE_679779053950-ADGP_Hybrid+%7C+BKWS+-+MIX+%7C+Txt+-+AI+And+Machine+Learning+-+Natural+Language+AI-KWID_43700078508455953-kwd-272027141742-userloc_1007850&utm_term=KW_google+cloud+natural+language+api-NET_g-PLAC_&&gad_source=1&gclid=EAIaIQobChMIj-KOwKCwhQMVTZxQBh2J5QWWEAAYASAAEgKaLvD_BwE&gclsrc=aw.ds&hl=en
   
-OpenAI. (2024). ChatGPT (4) [Large language model]. https://chat.openai.com
+https://chat.openai.com
 
 https://dovetail.com/research/field-study/#:~:text=A%20field%20study%20is%20a,%2C%20community%2C%20or%20natural%20habitat.
 
