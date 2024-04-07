@@ -17,6 +17,7 @@
   prepared for him.
 
 	Once the user is logged in the "Sign in" button is replaced by a "Logout" button. If the user decides to take a look at the About 
+<<<<<<< HEAD
   page, he will find a "Start" button, clicking on it will take them to the Sign in page if he is not logged in, and if he is, he will be 
   taken to the Introduction page.
  
@@ -68,3 +69,11 @@
 
   https://dkit.ie.libguides.com/literaturereview
   
+=======
+ page, he will find a "Start" button, clicking on it will take them to the Sign in page if he is not logged in, and if he is, he will be 
+ taken to the Introduction page.
+ 
+	If the user wants to send a message to the website's support, he can do so on the Support page. The message is sent and stored in 
+ the website's database, along with the user's name, email, and timestamp. The answers given in the questionnaire are also stored in the 
+ website's database, in addition to the registered users and the analysis of the results.
+>>>>>>> d7f51f3fbb9a00c6ac00367f7c52f195e1bca97e
