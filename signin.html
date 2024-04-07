@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -94,7 +93,6 @@
     </footer>
 
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
@@ -108,9 +106,8 @@
             measurementId: "G-1DG6QE214B"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Initialize Firebase Auth
+        const auth = getAuth(app); 
 
         document.getElementById('signin-form').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -119,20 +116,15 @@
 
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    // Signed in 
-                    // Redirect to home page
-                    window.location.href = "keyterms.html"; // Adjust the path as needed
+                    window.location.href = "keyterms.html";
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    // Show error message to your user
                     console.error("Error in user sign in:", errorCode, errorMessage);
                 });
         });
     </script>
     <script src="signin.js"></script>
-
 </body>
-
 </html>

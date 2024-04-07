@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,7 +97,6 @@
     </footer>
 
     <script type="module">
-        // Import the necessary functions from the Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
@@ -113,10 +111,9 @@
             measurementId: "G-1DG6QE214B"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Initialize Firebase Auth
-        const db = getFirestore(app); // Initialize Firestore
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
         document.getElementById('signup-form').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -125,24 +122,19 @@
 
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    // User registration successful
                     const user = userCredential.user;
                     console.log("User created:", user);
 
-                    // Additional user data you want to save
                     const userData = {
                         email: user.email,
-                        createdAt: new Date() // Current timestamp
-                        // You can add more user-related data here
+                        createdAt: new Date()
                     };
 
-                    // Save the user data to Firestore
-                    const userRef = doc(db, "users", user.uid); // "users" is the collection name
+                    const userRef = doc(db, "users", user.uid); 
                     setDoc(userRef, userData)
                         .then(() => {
                             console.log("User data saved to Firestore");
-                            // Redirect to home page or a post-signup page
-                            window.location.href = "questionnaire.html"; // Adjust the redirection URL as needed
+                            window.location.href = "keyterms.html"; 
                         })
                         .catch((error) => {
                             console.error("Error saving user data to Firestore:", error);
@@ -151,11 +143,9 @@
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    // Show error message to the user
                     console.error("Error in user registration:", errorCode, errorMessage);
                 });
         });
     </script>
 </body>
-
 </html>

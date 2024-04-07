@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,11 +20,9 @@
         .results-section {
             margin-bottom: 20px;
         }
-
         .results-section h2 {
             margin: 10px 0;
         }
-
         .results-content {
             background-color: #f5f5f5;
             padding: 10px;
@@ -110,11 +107,20 @@
             measurementId: "G-1DG6QE214B"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Initialize Firebase Auth
-        const db = getFirestore(app); // Initialize Firestore
+        const auth = getAuth(app); 
+        const db = getFirestore(app); 
 
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('btn-cta').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'inline-block';
+            } else {
+                document.getElementById('btn-cta').style.display = 'inline-block';
+                document.getElementById('logout-btn').style.display = 'none';
+            }
+        });
+        
         const fetchAndDisplayResults = async (userId) => {
             const resultsRef = collection(db, 'analysisResults');
             const q = query(resultsRef, where("userId", "==", userId), orderBy("timestamp", "desc"), limit(1));
@@ -123,16 +129,15 @@
             if (!querySnapshot.empty) {
                 const latestResult = querySnapshot.docs[0].data();
                 document.getElementById('briefSummary').textContent = latestResult.briefSummary;
-                // Atualize outros elementos conforme necessário
             } else {
-                console.log("Não foram encontrados resultados de análise para o usuário.");
+                console.log("We did not find results to analyze.");
             }
         };
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 fetchAndDisplayResults(user.uid);
             } else {
-                console.log("Usuário não está logado.");
+                console.log("User is not logged in.");
             }
         });
     </script>

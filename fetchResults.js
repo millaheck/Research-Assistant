@@ -27,17 +27,16 @@ const fetchAndDisplayResults = async (userId) => {
         document.getElementById("methodologyOverview").textContent = latestResult.overview;
         document.getElementById("timetable").textContent = latestResult.timetable;
     } else {
-        console.log("Não foram encontrados resultados de análise para o usuário.");
+        console.log("We did not find results to analyze.");
     }
 };
 
-// Certifique-se de que o DOM está totalmente carregado antes de tentar acessar elementos do DOM ou autenticar o usuário
 document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             fetchAndDisplayResults(user.uid);
         } else {
-            console.log("Usuário não está logado.");
+            console.log("User is not logged in.");
         }
     });
 });

@@ -12,7 +12,6 @@ exports.analyzeTextAndGenerateResults = functions.firestore
     .onCreate(async (snap, context) => {
         const data = snap.data();
 
-        // Combina as respostas das perguntas 1, 2 e 3 para análise
         const text = `${data.problemDescription} ${data.problemRelevance} ${data.methodologyDescription} ${data.methodologyType} `;
 
         const document = {
@@ -20,24 +19,28 @@ exports.analyzeTextAndGenerateResults = functions.firestore
             type: 'PLAIN_TEXT',
         };
 
-        // Chamada para a API do Google Cloud Natural Language para analisar o sentimento
         const [result] = await client.analyzeSentiment({ document });
         const sentiment = result.documentSentiment;
 
-        // Construa um resumo baseado nos resultados da análise
-        const briefSummary = `The research addresses "${data.problemDescription}" as a problem research with a ${sentiment.score} outlook and magnitude ${sentiment.magnitude}. The methodology used will be "${data.methodologyDescription}" and the ${data.methodologyType} approach will be utilized to explore the relevance of "${data.problemRelevance}".`;
+        let sentimentDescription = 'potential to be good research or not depends on how you approach the direction of your research';
+        if (sentiment.score > 0) {
+            sentimentDescription = 'potencial to be worked on and make a good contribution to society';
+        } else if (sentiment.score < 0) {
+            sentimentDescription = 'perspectives to work on, even though you may face some problems if you do not address more specificity';
+        }
 
-        // Salve o resumo e os resultados da análise no Firestore
+        const briefSummary = `The research addresses ${data.problemDescription} as a problem research that has a ${sentiment.score}. The methodology used will be ${data.methodologyDescription} and the ${data.methodologyType} approach will be utilized to explore the relevance of ${data.problemRelevance}.`;
+
         await db.collection('analysisResults').doc(context.params.responseId).set({
             userId: data.userId,
             briefSummary,
-            sentimentScore: sentiment.score,
-            sentimentMagnitude: sentiment.magnitude,
+            methodologyOverview,
+            timetable,
+            sentiment: sentiment.score,
             timestamp: admin.firestore.FieldValue.serverTimestamp()
         });
-        console.log('Analysis and brief summary saved successfully.');
+        console.log('Analysis saved successfully.');
     });
-
 
     exports.processQuestionnaireSubmission = functions.firestore
     .document("questionnaireResponses/{responseId}")
@@ -45,11 +48,9 @@ exports.analyzeTextAndGenerateResults = functions.firestore
         const data = snap.data();
         const methodologyOverview = `Methodology: ${data.methodologyDescription.join(", ")}. Research phases: ${data.research-phases}`;
 
-        // Salvar o overview da metodologia no Firestore em um novo documento ou campo
         return db.collection("methodologyOverviews").doc(context.params.responseId).set({
-            overview: methodologyOverview,
             userId: data.userId,
-            // Adicione outras informações necessárias aqui
+            overview: methodologyOverview,
             timestamp: admin.firestore.FieldValue.serverTimestamp()
         });
     });

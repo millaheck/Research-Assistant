@@ -88,19 +88,19 @@
                         </style>
                         <div>
                             <div class="response-option1">
-                                <input type="checkbox" id="case study" name="response" value="Option 1">
+                                <input type="checkbox" id="option1" name="response" value="case study">
                                 <label for="option1">Case study</label>
                             </div>
                             <div class="response-option2">
-                                <input type="checkbox" id="option2" name="response" value="Option 2">
+                                <input type="checkbox" id="option2" name="response" value="literature review">
                                 <label for="option2">Literature review</label>
                             </div>
                             <div class="response-option3">
-                                <input type="checkbox" id="option3" name="response" value="Option 3">
+                                <input type="checkbox" id="option3" name="response" value="questionnaire">
                                 <label for="option3">Questionnaire</label>
                             </div>
                             <div class="response-option4">
-                                <input type="checkbox" id="option4" name="response" value="Option 4">
+                                <input type="checkbox" id="option4" name="response" value="field study">
                                 <label for="option4">Field study</label>
                             </div>
                         </div>
@@ -290,27 +290,17 @@
                 logoutButton.style.display = 'none';
             }
         });
-
-        
         function analyzeDataAndDisplayResults(data) {
             function analyzeDataAndDisplayResults(formData) {
                 const methodologyOverview = `Based on your selection, a ${formData.methodologyType} approach will be used. This methodology includes ${formData.methodologyOptions.join(", ")}.`;
-
                 const timetable = `Your project has key deliveries scheduled on: ${formData.projectDeadlines.map(deadline => deadline.date).join(", ")}.`;
-
                 const briefSummary = `Your research will explore ${formData.problemDescription}, focusing on ${formData.problemRelevance}. The chosen methodology is ${formData.methodologyType}, which will help in ${formData.methodologyOptions.length > 1 ? 'combining different research techniques' : 'deep diving into the specific aspects of the research'}.`;
                 
                 console.log(methodologyOverview);
                 console.log(timetable);
                 console.log(briefSummary);
-
-                // Exemplo de como você pode atualizar o DOM ou realizar outras ações com os resultados
-                // document.getElementById('methodologyOverview').textContent = methodologyOverview;
-                // document.getElementById('timetable').textContent = timetable;
-                // document.getElementById('briefSummary').textContent = briefSummary;
             }
         }
-
         const responses = {
             problemDescription: document.getElementById('problem-description').value,
             problemRelevance: document.getElementById('problem-relevance').value,

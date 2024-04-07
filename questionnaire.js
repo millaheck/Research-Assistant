@@ -41,10 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 date: document.getElementById(`date${i + 1}`).value
             })),
             userId: user.uid,
-            timestamp: serverTimestamp(), // This correctly sets a server-side timestamp
+            timestamp: serverTimestamp(), 
         };
     
-        // Use 'db' to interact with Firestore
         try {
             const docRef = await addDoc(collection(db, "questionnaireResponses"), formData);
             console.log('Questionnaire submitted successfully, document ID:', docRef.id);
