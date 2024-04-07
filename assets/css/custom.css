@@ -351,6 +351,13 @@ header.theme-dark .container-btn a.btn:nth-child(2):active { border-color: var(-
 
 
 /* RESULTS */
+body {
+    background-image: url(/assets/img/ceu.jpg); /* Substitua pelo caminho correto da sua imagem */
+    background-size: cover; /* Faz com que a imagem de fundo cubra toda a página */
+    background-position: center; /* Centraliza a imagem de fundo */
+    background-repeat: no-repeat; /* Previne a repetição da imagem */
+}
+
 .section-selector-7.theme-dark { background-image: url(/assets/img/ceu.jpg); }
 .section-selector-7 .col-1-badge { color: var(--white-000) }
 .section-selector-7 .col-1-badge { background-color: var(--cyan-700) }
@@ -372,3 +379,19 @@ header.theme-dark .container-btn a.btn:nth-child(2):active { border-color: var(-
 .section-selector-7.theme-dark .cols-shadows .col-3 { box-shadow: rgba(255, 255, 255, 0.2) 14px 14px 14px 0px}
 .section-selector-7 .col-3 .badge { color: var(--cyan-500) }
 .section-selector-7 .col-3 .badge { background-color: var(--trend-800) }
+
+.results-content {
+    background-color: rgb(24, 8, 81); /* Cor de fundo */
+    color: rgb(56, 169, 197); /* Cor das letras */
+    font-size: 20px;
+    padding: 15px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-bottom: 10px; /* Espaçamento abaixo do elemento */
+}
+
+#resultsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Opcional: centraliza os elementos verticalmente no contêiner */
+}
+

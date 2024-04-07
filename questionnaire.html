@@ -37,7 +37,7 @@
                     <li><a href="keyterms.html">Introduction</a></li>
                     <li><a href="support.html">Support</a></li>
                 </ul>
-				<button id="logout-btn" style="display: none;">Logout</button>
+                <button id="logout-btn" style="display: none;">Logout</button>
             </div>
         </div>
     </nav>
@@ -82,14 +82,13 @@
                                 display: flex;
                                 align-items: center;
                             }
-
                             .response-option label {
                                 margin-left: 8px;
                             }
                         </style>
                         <div>
                             <div class="response-option1">
-                                <input type="checkbox" id="option1" name="response" value="Option 1">
+                                <input type="checkbox" id="case study" name="response" value="Option 1">
                                 <label for="option1">Case study</label>
                             </div>
                             <div class="response-option2">
@@ -114,21 +113,18 @@
                             more" button. What are the delivery dates for your research?</p>
                         <div><a href="keyterms.html" class="btn btn-outline btn-pill btn-shadow"><span>Learn
                                     more</span></a></div>
-
                         <label for="research-phases">5- Please fill in the tasks you have for each phase of your
                             research:</label>
                         <style>
                             .question-container {
                                 margin: 20px;
                             }
-
                             .input-group1,
                             .input-group2,
                             .input-group3 {
                                 margin-right: 10px;
                                 font-weight: bold;
                             }
-
                             .input-group1,
                             .input-group2,
                             .input-group3 {
@@ -138,7 +134,6 @@
                                 border: 1px solid #ccc;
                                 flex-grow: 1;
                             }
-
                             .task-label {
                                 width: 60px;
                                 color: aquamarine;
@@ -200,7 +195,6 @@
                                     display: flex;
                                     align-items: center;
                                     margin-right: 20px;
-                                    /* Espaçamento entre os grupos de input */
                                 }
 
                                 .delivery-form label {
@@ -210,7 +204,6 @@
                                 .delivery-form input[type="text"],
                                 .delivery-form input[type="date"] {
                                     margin-right: 10px;
-                                    /* Espaçamento entre inputs dentro de um grupo */
                                 }
                             </style>
                             <div class="delivery-row">
@@ -239,7 +232,8 @@
                             </div>
                         </section>
                     </section>
-                    <button id="btn-submit" class="btn-solid btn-pill btn-shadow" type="submit"><span>Submit questionnaire</span></button>
+                    <button id="btn-submit" class="btn-solid btn-pill btn-shadow" type="submit"><span>Submit
+                            questionnaire</span></button>
             </div>
             </form>
         </section>
@@ -265,8 +259,8 @@
         </div>
     </footer>
 
+  
     <script type="module" src="questionnaire.js">
-        // Import the necessary functions from the Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
@@ -281,10 +275,9 @@
             measurementId: "G-1DG6QE214B"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app); // Initialize Firebase Auth
-        const db = getFirestore(app); // Initialize Firestore
+        const auth = getAuth(app); 
+        const db = getFirestore(app); 
 
         onAuthStateChanged(auth, (user) => {
             const signInButton = document.getElementById('btn-cta');
@@ -298,101 +291,73 @@
             }
         });
 
-        const form = document.getElementById('email-form');
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const formData = {
-                // Colete os dados aqui
-            };
-
-            try {
-                await addDoc(collection(db, "questionnaires"), formData);
-                console.log('Questionnaire submitted successfully');
-                analyzeDataAndDisplayResults(formData); // Função para análise de dados
-                window.location.href = 'results.html'; // Redirecionamento
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        });
-
+        
         function analyzeDataAndDisplayResults(data) {
             function analyzeDataAndDisplayResults(formData) {
-    // Exemplo de análise dos dados do formulário para gerar os resultados personalizados
-    const methodologyOverview = `Based on your selection, a ${formData.methodologyType} approach will be used. This methodology includes ${formData.methodologyOptions.join(", ")}.`;
-    
-    const timetable = `Your project has key deliveries scheduled on: ${formData.projectDeadlines.map(deadline => deadline.date).join(", ")}.`;
-    
-    const briefSummary = `Your research will explore ${formData.problemDescription}, focusing on ${formData.problemRelevance}. The chosen methodology is ${formData.methodologyType}, which will help in ${formData.methodologyOptions.length > 1 ? 'combining different research techniques' : 'deep diving into the specific aspects of the research'}.`;
+                const methodologyOverview = `Based on your selection, a ${formData.methodologyType} approach will be used. This methodology includes ${formData.methodologyOptions.join(", ")}.`;
 
-    // Aqui, você poderia atualizar o DOM com esses resultados, enviar para o backend, ou salvar no Firestore, etc.
-    console.log(methodologyOverview);
-    console.log(timetable);
-    console.log(briefSummary);
+                const timetable = `Your project has key deliveries scheduled on: ${formData.projectDeadlines.map(deadline => deadline.date).join(", ")}.`;
 
-    // Exemplo de como você pode atualizar o DOM ou realizar outras ações com os resultados
-    // document.getElementById('methodologyOverview').textContent = methodologyOverview;
-    // document.getElementById('timetable').textContent = timetable;
-    // document.getElementById('briefSummary').textContent = briefSummary;
+                const briefSummary = `Your research will explore ${formData.problemDescription}, focusing on ${formData.problemRelevance}. The chosen methodology is ${formData.methodologyType}, which will help in ${formData.methodologyOptions.length > 1 ? 'combining different research techniques' : 'deep diving into the specific aspects of the research'}.`;
+                
+                console.log(methodologyOverview);
+                console.log(timetable);
+                console.log(briefSummary);
 
-    // Este é apenas um exemplo e deve ser ajustado conforme o seu contexto específico
-}
-
-            // Lógica para análise dos dados submetidos e definição de resultados personalizados
+                // Exemplo de como você pode atualizar o DOM ou realizar outras ações com os resultados
+                // document.getElementById('methodologyOverview').textContent = methodologyOverview;
+                // document.getElementById('timetable').textContent = timetable;
+                // document.getElementById('briefSummary').textContent = briefSummary;
+            }
         }
 
+        const responses = {
+            problemDescription: document.getElementById('problem-description').value,
+            problemRelevance: document.getElementById('problem-relevance').value,
+            methodologyType: document.getElementById('methodology-type').value,
+            methodologyOptions: [
+                document.getElementById('option1').checked ? 'Case study' : null,
+                document.getElementById('option2').checked ? 'Literature review' : null,
+                document.getElementById('option3').checked ? 'Questionnaire' : null,
+                document.getElementById('option4').checked ? 'Field study' : null,
+            ].filter(Boolean), 
+            researchPhases: {
+                preparatoryPhase: [
+                    document.getElementById('preparatory-task-1').value,
+                    document.getElementById('preparatory-task-2').value,
+                    document.getElementById('preparatory-task-3').value,
+                    document.getElementById('preparatory-task-4').value,
+                    document.getElementById('preparatory-task-5').value,
+                ],
+                dataCollectionPhase: [
+                    document.getElementById('collection-task-1').value,
+                    document.getElementById('collection-task-2').value,
+                    document.getElementById('collection-task-3').value,
+                    document.getElementById('collection-task-4').value,
+                    document.getElementById('collection-task-5').value,
+                ],
+                dataAnalysisPhase: [
+                    document.getElementById('analysis-task-1').value,
+                    document.getElementById('analysis-task-2').value,
+                    document.getElementById('analysis-task-3').value,
+                    document.getElementById('analysis-task-4').value,
+                    document.getElementById('analysis-task-5').value,
+                ],
+            },
+            projectDeadlines: [
+                { delivery: document.getElementById('delivery1').value, date: document.getElementById('date1').value },
+                { delivery: document.getElementById('delivery2').value, date: document.getElementById('date2').value },
+                { delivery: document.getElementById('delivery3').value, date: document.getElementById('date3').value },
+                { delivery: document.getElementById('delivery4').value, date: document.getElementById('date4').value },
+            ]
+        };
 
-            // Collect questionnaire responses
-            const responses = {
-                problemDescription: document.getElementById('problem-description').value,
-                problemRelevance: document.getElementById('problem-relevance').value,
-                methodologyType: document.getElementById('methodology-type').value,
-                methodologyOptions: [
-                    document.getElementById('option1').checked ? 'Case study' : null,
-                    document.getElementById('option2').checked ? 'Literature review' : null,
-                    document.getElementById('option3').checked ? 'Questionnaire' : null,
-                    document.getElementById('option4').checked ? 'Field study' : null,
-                ].filter(Boolean), // Filters out unchecked/null options
-                researchPhases: {
-                    preparatoryPhase: [
-                        document.getElementById('preparatory-task-1').value,
-                        document.getElementById('preparatory-task-2').value,
-                        document.getElementById('preparatory-task-3').value,
-                        document.getElementById('preparatory-task-4').value,
-                        document.getElementById('preparatory-task-5').value,
-                    ],
-                    dataCollectionPhase: [
-                        document.getElementById('collection-task-1').value,
-                        document.getElementById('collection-task-2').value,
-                        document.getElementById('collection-task-3').value,
-                        document.getElementById('collection-task-4').value,
-                        document.getElementById('collection-task-5').value,
-                    ],
-                    dataAnalysisPhase: [
-                        document.getElementById('analysis-task-1').value,
-                        document.getElementById('analysis-task-2').value,
-                        document.getElementById('analysis-task-3').value,
-                        document.getElementById('analysis-task-4').value,
-                        document.getElementById('analysis-task-5').value,
-                    ],
-                },
-                projectDeadlines: [
-                    { delivery: document.getElementById('delivery1').value, date: document.getElementById('date1').value },
-                    { delivery: document.getElementById('delivery2').value, date: document.getElementById('date2').value },
-                    { delivery: document.getElementById('delivery3').value, date: document.getElementById('date3').value },
-                    { delivery: document.getElementById('delivery4').value, date: document.getElementById('date4').value },
-                ]
-            };
-
-            try {
-                await addDoc(collection(db, "questionnaireResponses"), responses);
-                console.log('Questionnaire responses saved successfully');
-                // Optional: Clear the form or show a success message
-            } catch (error) {
-                console.error('Error saving questionnaire responses: ', error);
-                // Optional: Show an error message
-            };
+        try {
+            await addDoc(collection(db, "questionnaireResponses"), responses);
+            console.log('Questionnaire responses saved successfully');
+        } catch (error) {
+            console.error('Error saving questionnaire responses: ', error);
+        };
     </script>
-    <script src="questionnaire.js"></script>
 </body>
 </html>
-

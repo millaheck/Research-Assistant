@@ -55,8 +55,7 @@
                     <li><a href="support.html">Support</a></li>
                     <li><a class="btn btn-outline btn-pill btn-shadow" id="btn-cta" href="signin.html"><span>Sign
                                 in</span></a></li>
-                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow"
-                        style="display: none;">Logout</button>
+                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow" style="display: none;">Logout</button>
                 </ul>
             </div>
         </div>
@@ -66,9 +65,12 @@
         <section class="w-1356px section-selector-7 theme-dark">
             <div class="col-1 text-center w-820px">
                 <h2 class="">Get your results:</h2>
-                <div id="methodologyOverview"></div>
-                <div id="timetable"></div>
-                <div id="briefSummary"></div>
+                <p>Brief Summary of your research:</p>
+                <div id="briefSummary" class="results-content">Loading...</div>
+                <p>Overview of the methodology:</p>
+                <div id="methodologyOverview" class="results-content">Loading...</div>
+                <p>Timetable:</p>
+                <div id="timetable" class="results-content">Loading...</div>
             </div>
         </section>
     </main>
@@ -93,11 +95,10 @@
         </div>
     </footer>
 
-    <script type="module">
-        // Import the necessary functions from the Firebase SDKs
+    <script type="module" src="fetchResults.js">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+        import { getFirestore, collection, query, where, orderBy, limit, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBPjv94orRGsAntSYukwaPGRydWOvtFcW4",
@@ -114,49 +115,26 @@
         const auth = getAuth(app); // Initialize Firebase Auth
         const db = getFirestore(app); // Initialize Firestore
 
+        const fetchAndDisplayResults = async (userId) => {
+            const resultsRef = collection(db, 'analysisResults');
+            const q = query(resultsRef, where("userId", "==", userId), orderBy("timestamp", "desc"), limit(1));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                const latestResult = querySnapshot.docs[0].data();
+                document.getElementById('briefSummary').textContent = latestResult.briefSummary;
+                // Atualize outros elementos conforme necessário
+            } else {
+                console.log("Não foram encontrados resultados de análise para o usuário.");
+            }
+        };
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                document.getElementById('btn-cta').style.display = 'none';
-                document.getElementById('logout-btn').style.display = 'block';
                 fetchAndDisplayResults(user.uid);
             } else {
-                document.getElementById('btn-cta').style.display = 'block';
-                document.getElementById('logout-btn').style.display = 'none';
-                // Opcionalmente, redirecione para a página de login
-                console.log("User is not logged in.");
+                console.log("Usuário não está logado.");
             }
         });
-
-        document.getElementById('logout-btn').addEventListener('click', async () => {
-            try {
-                await auth.signOut();
-                console.log('User logged out successfully');
-                window.location.href = 'signin.html';
-            } catch (error) {
-                console.error('Logout Error:', error);
-            }
-        });
-
-        async function fetchAndDisplayResults(userId) {
-            const docRef = doc(db, "userResults", userId);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('resultsContainer').innerHTML = `
-                    <div>
-                        <h2>Methodology Overview</h2>
-                        <p>${data.methodologyOverview}</p>
-                        <h2>Timetable</h2>
-                        <p>${data.timetable}</p>
-                        <h2>Brief Summary of Your Research</h2>
-                        <p>${data.briefSummary}</p>
-                    </div>
-                `;
-            } else {
-                console.log("No results found for the user.");
-            }
-        }
     </script>
 </body>
 
