@@ -23,7 +23,7 @@ and obtains personalized results that give an overview of the research, contribu
  knowledge.
 
 
-REFERENCES:
+REFERENCES:             
 https://www.simplypsychology.org/qualitative-quantitative.html
 
 https://stevenson.libguides.com/c.php?g=236343#:~:text=In%20general%2C%20quantitative%20research%20seeks,use%20of%20interviews%20and%20observation.
