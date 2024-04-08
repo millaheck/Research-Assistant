@@ -36,9 +36,8 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="keyterms.html">Introduction</a></li>
                     <li><a href="support.html">Support</a></li>
+                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow">Logout</button>
                 </ul>
-                    <button id="logout-btn" class="btn btn-outline btn-pill btn-shadow"
-                        style="display: none;">Logout</button>
             </div>
         </div>
     </nav>
@@ -48,6 +47,10 @@
             <div class="col-2 col-text">
                 <form id="email-form" name="email-form" charset="utf-8" method="post" action="">
                     <section>
+                        <p>If you have any questions about the terminology used in this questionnaire, before start answering, click the "Learn
+                            more" button to read the Introduction again.</p>
+                        <div><a href="keyterms.html" class="btn btn-outline btn-pill btn-shadow"><span>Learn
+                                    more</span></a></div>
                         <h2>Research Problem</h2>
                         <p>In this topic you must respond about your research problem. What do you want to research,
                             that's your problem. Why research this?</p>
@@ -60,11 +63,7 @@
                     </section>
                     <section>
                         <h2>Methodology</h2>
-                        <p>How will you develop this research? If you have any questions about this topic, before
-                            answering, click the "Learn more" button.</p>
-                        <div><a href="keyterms.html" class="btn btn-outline btn-pill btn-shadow"><span>Learn
-                                    more</span></a></div>
-
+                        <p>How will you develop this research?</p>
                         <label for="methodology-type">3- Is your research qualitative or quantitative?</label>
                         <div><select id="methodology-type" name="methodology-type" required>
                                 <option value="">Please select</option>
@@ -111,10 +110,7 @@
                         <h2>Research Phases</h2>
                         <p>Research involves many steps to complete. Basically, we can say that there is a preparation
                             stage, a stage where the data will be collected, and another where the data will be
-                            analyzed. If you have any questions about this topic, before answering, click the "Learn
-                            more" button. What are the delivery dates for your research?</p>
-                        <div><a href="keyterms.html" class="btn btn-outline btn-pill btn-shadow"><span>Learn
-                                    more</span></a></div>
+                            analyzed.
                         <label for="research-phases">5- Please fill in the tasks you have for each phase of your
                             research:</label>
                         <style>
@@ -188,7 +184,7 @@
                         </div>
                         <section>
                             <label for="project-deadlines">6- What are the deadlines you have for this project
-                                research?</label>
+                                research and what do you have to deliver?</label>
                             <style>
                                 .delivery-form {
                                     display: flex;

@@ -22,7 +22,7 @@ exports.analyzeTextAndGenerateResults = functions.firestore
         const [result] = await client.analyzeSentiment({ document });
         const sentiment = result.documentSentiment;
 
-        let sentimentDescription = 'Potential to be good research or not depends on how you approach the direction of your research';
+        let sentimentDescription = 'potential to be good research or not depends on how you approach the direction of your research';
         if (sentiment.score > 0) { 
             sentimentDescription = 'potencial to be worked on and make a good contribution to society';
         } else if (sentiment.score < 0) {
@@ -39,5 +39,6 @@ exports.analyzeTextAndGenerateResults = functions.firestore
         });
         console.log('Analysis and brief summary saved successfully.');
     });
+    
 
    
