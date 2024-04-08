@@ -129,24 +129,31 @@
             });
         });
         document.getElementById('support-form').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const name = document.getElementById('full_name').value;
-            const email = document.getElementById('email_address').value;
-            const message = document.getElementById('form_message').value;
+        event.preventDefault();
+        const name = document.getElementById('full_name').value;
+        const email = document.getElementById('email_address').value;
+        const message = document.getElementById('form_message').value;
 
-            try {
-                await addDoc(collection(db, "supportMessages"), {
-                    name: name,
-                    email: email,
-                    message: message,
-                    timestamp: serverTimestamp() 
-                });
-                console.log('Message sent successfully');
-                
-            } catch (error) {
-                console.error('Error sending message: ', error);
-            }
-        });
+        try {
+            await addDoc(collection(db, "supportMessages"), {
+                name: name,
+                email: email,
+                message: message,
+                timestamp: serverTimestamp() 
+            });
+            console.log('Message sent successfully');
+
+            document.getElementById('full_name').value = '';
+            document.getElementById('email_address').value = '';
+            document.getElementById('form_message').value = '';
+
+            alert('Thank you for your message. We will get back to you as soon as possible.');
+
+        } catch (error) {
+            console.error('Error sending message: ', error);
+            alert('There was a problem submitting your message. Please try again.');
+        }
+    });
     </script>
 </body>
 </html>

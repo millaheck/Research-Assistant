@@ -24,8 +24,8 @@ const fetchAndDisplayResults = async (userId) => {
     if (!querySnapshot.empty) {
         const latestResult = querySnapshot.docs[0].data();
         document.getElementById('briefSummary').textContent = latestResult.briefSummary;
-        document.getElementById("methodologyOverview").textContent = latestResult.overview;
-       
+        document.getElementById('methodologyOverview').textContent = latestResult.methodologyOverview;
+        document.getElementById('timetable').textContent = latestResult.timetable;
     } else {
         console.log("We did not find results to analyze.");
     }
